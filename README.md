@@ -16,7 +16,7 @@ This application helps Arsellis Landscape and Design manage:
 
 ### Prerequisites
 
-- Ruby 3.2.3
+- Ruby 3.2.2 (use rbenv to install/update/manage ruby versions)
 - SQLite3
 - Bundler
 
