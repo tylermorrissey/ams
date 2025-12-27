@@ -1,0 +1,40 @@
+<div class="card">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <h1>Employee Details</h1>
+    <div>
+      <%= link_to "Edit", edit_employee_path(@employee), class: "btn", style: "margin-right: 0.5rem;" %>
+      <%= button_to "Delete", employee_path(@employee), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    </div>
+  </div>
+  
+  <div style="display: grid; gap: 1rem;">
+    <div>
+      <strong>Name:</strong>
+      <p style="margin-top: 0.25rem;"><%= @employee.name %></p>
+    </div>
+    
+    <div>
+      <strong>Email:</strong>
+      <p style="margin-top: 0.25rem;"><%= @employee.email %></p>
+    </div>
+    
+    <div>
+      <strong>Phone:</strong>
+      <p style="margin-top: 0.25rem;"><%= @employee.phone || "N/A" %></p>
+    </div>
+    
+    <div>
+      <strong>Role:</strong>
+      <p style="margin-top: 0.25rem;"><%= @employee.role %></p>
+    </div>
+    
+    <div>
+      <strong>Hire Date:</strong>
+      <p style="margin-top: 0.25rem;"><%= @employee.hire_date&.strftime("%B %d, %Y") || "N/A" %></p>
+    </div>
+  </div>
+  
+  <div style="margin-top: 1.5rem;">
+    <%= link_to "Back to Employees", employees_path, class: "btn btn-secondary" %>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="card">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <h1>Employees</h1>
+    <%= link_to "New Employee", new_employee_path, class: "btn" %>
+  </div>
+
+  <% if @employees.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Role</th>
+          <th>Hire Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.name %></td>
+            <td><%= employee.email %></td>
+            <td><%= employee.phone || "N/A" %></td>
+            <td><%= employee.role %></td>
+            <td><%= employee.hire_date&.strftime("%B %d, %Y") || "N/A" %></td>
+            <td>
+              <%= link_to "View", employee_path(employee), class: "btn", style: "padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 0.5rem;" %>
+              <%= link_to "Edit", edit_employee_path(employee), class: "btn btn-secondary", style: "padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-right: 0.5rem;" %>
+              <%= button_to "Delete", employee_path(employee), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger", style: "padding: 0.4rem 0.8rem; font-size: 0.85rem;" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p style="color: #666; text-align: center; padding: 2rem;">
+      No employees found. <%= link_to "Add your first employee", new_employee_path %>.
+    </p>
+  <% end %>
+</div>

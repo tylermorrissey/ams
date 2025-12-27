@@ -1,0 +1,9 @@
+<div class="card">
+  <h1>New Employee</h1>
+  
+  <%= render "form", employee: @employee %>
+  
+  <div style="margin-top: 1rem;">
+    <%= link_to "Back to Employees", employees_path, class: "btn btn-secondary" %>
+  </div>
+</div>
