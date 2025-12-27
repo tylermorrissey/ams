@@ -1,0 +1,52 @@
+<% if @employee.errors.any? %>
+  <div class="error-messages">
+    <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+    <ul>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @employee) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :phone %>
+    <%= form.telephone_field :phone %>
+  </div>
+
+  <div>
+    <%= form.label :role %>
+    <%= form.select :role, 
+      [
+        ["Landscaper", "Landscaper"],
+        ["Designer", "Designer"],
+        ["Project Manager", "Project Manager"],
+        ["Equipment Operator", "Equipment Operator"],
+        ["Supervisor", "Supervisor"],
+        ["Administrative", "Administrative"]
+      ], 
+      { include_blank: "Select a role" }, 
+      { required: true } 
+    %>
+  </div>
+
+  <div>
+    <%= form.label :hire_date %>
+    <%= form.date_field :hire_date %>
+  </div>
+
+  <div>
+    <%= form.submit class: "btn" %>
+  </div>
+<% end %>

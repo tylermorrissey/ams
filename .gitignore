@@ -10,6 +10,13 @@
 /test/version_tmp/
 /tmp/
 
+# Ignore SQLite databases
+*.sqlite3
+*.sqlite3-*
+
+# Ignore log files
+/log/*.log
+
 # Used by dotenv library to load environment variables.
 # .env
 
