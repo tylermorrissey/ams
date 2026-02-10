@@ -67,13 +67,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  # Disable CSRF protection in tests
-  config.before(:each, type: :request) do
-    ActionController::Base.allow_forgery_protection = false
-  end
-
-  config.after(:each, type: :request) do
-    ActionController::Base.allow_forgery_protection = true
-  end
 end
