@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Define the root path route ("/")
   root "home#index"
-
+  resources :projects
   # Employee management routes (example resource)
   resources :employees
   
