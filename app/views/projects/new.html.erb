@@ -4,19 +4,19 @@
     <%= form.label "Customer Name" %> <br>
     <%= form.text_field :customer_name %> <br>
 
-    <%= form.label "Date Started" %> <br>
-    <%= form.text_field :customer_name %> <br>
-    
     <%= form.label "Address" %> <br>
-    <%= form.text_field :customer_name %> <br>
+    <%= form.text_field :address %> <br>
 
     <%= form.label "Description of Job" %> <br>
-    <%= form.text_field :customer_name %> <br>
+    <%= form.text_field :desc %> <br>
 
     <%= form.label "Job Type" %> <br>
-    <%= form.text_field :customer_name %> <br>
+    <%= form.select :job_type, ["Landscape", "Hardscape", "Fall Cleanup", "Installation", "Irrigation", "Arbor", "Removal"] %> <br>
+
+    <%= form.label "Date Started" %> <br>
+    <%= form.date_field :date_started %> <br>
 
 
 
-    <%= form.submit "Search" %>
+    <%= form.submit "Submit" %>
 </div>
