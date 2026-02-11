@@ -4,6 +4,10 @@ class ProjectsController < ApplicationController
     @project.save!
   end
 
+  def new
+    @project = Project.new
+  end
+
 private 
   def project_params
     params.require(:project).permit(:customer_name, :date, :address, :desc, :job_type, 
