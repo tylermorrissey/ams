@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_10_233005) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_12_162627) do
+  create_table "assignments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "employee_id"
+    t.float "hours_onsite"
+    t.integer "project_id"
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_assignments_on_employee_id"
+    t.index ["project_id"], name: "index_assignments_on_project_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", null: false
@@ -20,14 +30,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_10_233005) do
     t.string "role", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_employees_on_email", unique: true
-  end
-
-  create_table "employees_onsites", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "customer_name"
-    t.string "employee_name"
-    t.float "hours_onsite"
-    t.datetime "updated_at", null: false
   end
 
   create_table "project_vehicles", force: :cascade do |t|
@@ -59,4 +61,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_10_233005) do
     t.datetime "updated_at", null: false
     t.integer "year"
   end
+
+  add_foreign_key "assignments", "employees"
+  add_foreign_key "assignments", "projects"
 end

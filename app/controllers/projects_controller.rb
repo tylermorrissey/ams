@@ -7,6 +7,14 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
   end
+  
+  def index
+    @projects = Project.all
+  end
+
+  def project_index
+    @project = Project.all[:id]
+  end
 
 private 
   def project_params
