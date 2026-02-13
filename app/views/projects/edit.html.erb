@@ -1,0 +1,58 @@
+<h1>Edit Project Information</h1>
+<%= form_with model: @project do |form| %>
+  <div>
+    <%= form.label "Customer Name" %> <br>
+    <%= form.text_field :customer_name %> <br>
+
+    <%= form.label "Address" %> <br>
+    <%= form.text_field :address %> <br>
+
+    <%= form.label "Description of Job" %> <br>
+    <%= form.text_field :desc %> <br>
+
+    <%= form.label "Job Type" %> <br>
+    <%= form.select :job_type, ["Landscape", "Hardscape", "Fall Cleanup", "Installation", "Irrigation", "Arbor", "Removal"] %> <br>
+
+    <%= form.label "Estimated Cost" %> <br>
+    <%= form.text_field :estimates %> <br>
+
+
+    <%= form.label "Net Cost" %> <br>
+    <%= form.text_field :net_cost %> <br>
+
+
+    <%= form.label "Description of Job" %> <br>
+    <%= form.text_field :desc %> <br>
+
+
+    <%= form.label "Employees on Site" %> <br>
+    <%#= form.collection_select :employees, @employees, :name, { prompt: "Choose an Employee" } %> <br>
+
+    <%= form.label "Materials used" %> <br>
+    <%#= form.collection_select :employees, @employees, :name, { prompt: "Choose an Employee" } %> <br>
+    <%# will need to make a Materials model %>
+
+
+    <%= form.label "Total Hours Onsite" %> <br>
+    <%= form.number_field :hours_oemployees_onsitensite, min: 0, max: 100, step: 1 %> <br>
+    <%# This will most likely run a query from all employees %>
+
+
+    <%= form.label "Equipment Onsite" %> <br>
+    <%#= form.select :equipment_onsite, [['Equipment 1', 1]]%> <br>
+    <%# will need to make a Equipment model %>
+
+
+    <%= form.label "Date Started" %> <br>
+    <%= form.date_field :date_started %> <br>
+
+
+    <%= form.label "Date Finished" %> <br>
+    <%= form.date_field :date_ended %> <br>
+
+
+
+
+    <%= form.submit "Submit" %>
+  <%end%>
+  </div>
