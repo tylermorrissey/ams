@@ -1,0 +1,33 @@
+<h1>Show Project</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Address</th>
+      <th>Description</th>
+      <th>Job Type</th>
+      <th>Estimate</th>
+      <th>Net Cost</th>
+      <th>Employees</th>
+      <th>Materials</th>
+      <th>Hours Onsite</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @project.customer_name %></td>
+        <td><%= @project.address %></td>
+        <td><%= @project.desc %></td>
+        <td><%= @project.estimates %></td>
+        <td><%= @project.net_cost %></td>
+        <td><%#= @project.employees %></td>
+        <td><%= @project.materials %></td>
+        <td><%= @project.hours_onsite %></td>
+        <td><%= @project.equipment_onsite %></td>
+        <td><%= @project.date_started %></td>
+        <td><%= @project.date_ended %></td>
+      </tr>
+  </tbody>
+</table>
