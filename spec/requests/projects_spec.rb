@@ -18,12 +18,6 @@ RSpec.describe "Projects", type: :request do
       }
     end
 
-    let(:invalid_attributes) do
-      {
-        
-      }
-    end
-
     context "with valid parameters" do
       it "creates a new Project" do
         expect {

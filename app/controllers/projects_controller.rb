@@ -12,8 +12,14 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
+  #all projects dashboard
   def project_index
     @project = Project.all[:id]
+  end
+
+  #individual project 
+  def show
+    Project.find(:id)
   end
 
 private 
