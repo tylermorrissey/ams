@@ -19,7 +19,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    Project.find(:id)
+    @project = Project.find(params[:id])
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+    @employees = Employee.all
   end
 
 private 
