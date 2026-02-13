@@ -1,0 +1,15 @@
+<h1> Add a Vehicle to the Fleet </h1>
+<div>
+  <%= form_with model: @vehicle do |form| %>
+    <%= form.label "Model" %> <br>
+    <%= form.text_field :model %> <br>
+
+    <%= form.label "Year" %> <br>
+    <%= form.text_field :year %> <br>
+
+    <%= form.label "Nick Name" %> <br>
+    <%= form.text_field :nick_name %> <br>
+
+    <%= form.submit "Submit" %>
+  <% end %>
+</div>
