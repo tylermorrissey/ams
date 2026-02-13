@@ -2,6 +2,12 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.save!
+
+    if @project.valid?
+      render :index
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def new
@@ -12,12 +18,6 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
-  #all projects dashboard
-  def project_index
-    @project = Project.all[:id]
-  end
-
-  #individual project 
   def show
     Project.find(:id)
   end

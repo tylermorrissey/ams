@@ -11,14 +11,14 @@
     </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td> <%= project.customer_name%>
-        <td> <%= project.address%>
-        <td> <%= project.job_type%>
-        <td> <%= link_to "More", controller: "projects", action: "project_index"%>
-      </tr>
-    <% end %>
+    <%# <% @project.each do |project| %>
+      <%# <tr> %>
+        <%# <td> <%= project.customer_name%> 
+        <%# <td> <%= project.address%> 
+        <%# <td> <%= project.job_type%> 
+        <%# <td> <%= link_to "More", controller: "projects", action: "project_index"%> 
+      <%# </tr> 
+    <%# <% end %> 
   </tbody>
   </table>
 </div>
