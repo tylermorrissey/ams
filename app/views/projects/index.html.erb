@@ -1,4 +1,5 @@
 <h1>Current Projects</h1>
+<%= button_to "New Project", new_project_path, method: :get %>
 <div>
   <table>
     <thead>
@@ -6,19 +7,27 @@
         <th>Customer Name</th>
         <th>Address</th>
         <th>Job Type</th>
-
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
   <tbody>
-    <%# <% @project.each do |project| %>
-      <%# <tr> %>
-        <%# <td> <%= project.customer_name%> 
-        <%# <td> <%= project.address%> 
-        <%# <td> <%= project.job_type%> 
-        <%# <td> <%= link_to "More", controller: "projects", action: "project_index"%> 
-      <%# </tr> 
-    <%# <% end %> 
+    <% if @projects.present? %>
+      <% @projects.each do |project| %>
+        <tr>
+          <td> <%= project.customer_name%> </td>
+          <td> <%= project.address%> </td>
+          <td> <%= project.job_type%> </td>
+          <td> <%#= project.employees%> </td>
+          
+          <td><%= link_to "Show", project %></td>
+          <td><%= link_to "Edit", edit_project_path(project) %></td>
+        </tr>
+      <% end %> 
+    <% else %>
+        <p>You don't have any projects yet. <%= link_to "Add one!", new_project_path %></p>
+    <% end %>
   </tbody>
   </table>
 </div>

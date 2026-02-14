@@ -15,11 +15,17 @@ class ProjectsController < ApplicationController
   end
   
   def index
-    @projects = Project.all
+      @projects = Project.all
+    # @projects = Project.all.includes(:employees)
   end
 
   def show
-    Project.find(:id)
+    @project = Project.find(params[:id])
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+    @employees = Employee.all
   end
 
 private 
