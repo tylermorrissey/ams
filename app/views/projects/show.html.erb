@@ -1,5 +1,5 @@
 <h1>Show Project</h1>
-<%= link_to 'Back', :back %>
+
 <table>
   <thead>
     <tr>
@@ -16,23 +16,18 @@
     </tr>
   </thead>
   <tbody>
-      <% if @project.present? %>
       <tr>
         <td><%= @project.customer_name %></td>
         <td><%= @project.address %></td>
         <td><%= @project.desc %></td>
         <td><%= @project.estimates %></td>
         <td><%= @project.net_cost %></td>
-        <td><%= @project.employees %></td>
+        <td><%#= @project.employees %></td>
         <td><%= @project.materials %></td>
         <td><%= @project.hours_onsite %></td>
         <td><%= @project.equipment_onsite %></td>
         <td><%= @project.date_started %></td>
         <td><%= @project.date_ended %></td>
       </tr>
-      <% else %>
-        <p>Project is empty.</p>
-      <% end %>
-      
   </tbody>
 </table>

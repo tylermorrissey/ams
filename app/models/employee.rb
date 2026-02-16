@@ -3,6 +3,5 @@ class Employee < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :role, presence: true
 
-  has_many :projects, through: :assignments
-  has_many :assignments
+  has_and_belongs_to_many :projects
 end
