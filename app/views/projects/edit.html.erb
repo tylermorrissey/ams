@@ -1,4 +1,5 @@
 <h1>Edit Project Information</h1>
+<%= link_to "Back", :back %>
 <%= form_with model: @project do |form| %>
   <div>
     <%= form.label "Customer Name" %> <br>
@@ -22,12 +23,12 @@
 
 
     <%= form.label "Employees on Site" %> <br>
-    <%= form.collection_select :employee_ids, @employees, :name, { prompt: "Choose an Employee" } %> <br>
+    <%= form.collection_select :employee_id, @employees, :name, :id, { prompt: "Choose an Employee" } %> <br>
 
 
 
     <%= form.label "Total Hours Onsite" %> <br>
-    <%= form.number_field :hours_oemployees_onsitensite, min: 0, step: 1 %> <br>
+    <%= form.number_field :hours_onsite, min: 0, max: 100, step: 1 %> <br>
     <%# This will most likely run a query from all employees %>
 
 
