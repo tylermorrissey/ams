@@ -27,11 +27,20 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @employees = Employee.all
   end
+  
+  def update
+    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      redirect_to @project
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
 private 
   def project_params
     params.require(:project).permit(:customer_name, :date, :address, :desc, :job_type, 
-                                    :estimates, :net_cost, :employees, :materials, :hours_onsite, 
-                                    :equipment_onsite)
+                                    :estimates, :net_cost, :materials, :hours_onsite, 
+                                    :equipment_onsite, employee_ids: [])
   end
 end

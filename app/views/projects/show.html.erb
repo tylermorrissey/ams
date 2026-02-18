@@ -5,14 +5,15 @@
     <tr>
       <th>Customer Name</th>
       <th>Address</th>
-      <th>Description</th>
-      <th>Job Type</th>
+      <th>Description</th>      
       <th>Estimate</th>
+      <th>Job Type</th>
       <th>Net Cost</th>
       <th>Employees</th>
-      <th>Materials</th>
-      <th>Hours Onsite</th>
-      <th>Description</th>
+      <th>Hours Onsite</th>      
+      <th>Equipment</th>
+      <th>Date Started</th>
+      <th>Date Ended</th>
     </tr>
   </thead>
   <tbody>
@@ -21,9 +22,9 @@
         <td><%= @project.address %></td>
         <td><%= @project.desc %></td>
         <td><%= @project.estimates %></td>
+        <td><%= @project.job_type %></td>
         <td><%= @project.net_cost %></td>
-        <td><%#= @project.employees %></td>
-        <td><%= @project.materials %></td>
+        <td><%= @project.employees.map(&:name).join(", ") %></td>
         <td><%= @project.hours_onsite %></td>
         <td><%= @project.equipment_onsite %></td>
         <td><%= @project.date_started %></td>
