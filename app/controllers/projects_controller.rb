@@ -53,12 +53,12 @@ private
     :job_type,
     :estimates,
     :net_cost,
-    :employees,
     :materials,
     :hours_onsite,
     :equipment_onsite,
     :date_started,
-    :date_ended
+    :date_ended,
+    employee_ids: []
     )
   end
 end
