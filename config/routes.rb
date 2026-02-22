@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   # Define the root path route ("/")
-  root "home#index"
+  root 'home#index'
 
   # Employee management routes (example resource)
-  resources :employees, :projects, :vehicles, :assignments
-  
+  resources :employees, :projects, :vehicles, :assignments, :tools
+
   # Health check route for monitoring
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 end

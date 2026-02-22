@@ -42,7 +42,6 @@ RSpec.describe "Projects", type: :request do
         expect {
           post projects_path, params: { project: valid_attributes }, headers: headers
         }.to change(Project, :count).by(1)
-        put response.status
       end
     end
 
@@ -50,7 +49,7 @@ RSpec.describe "Projects", type: :request do
       xit "fails to create a new Project" do
         expect {
           post projects_path, params: { project: invalid_attributes }, headers: headers
-      }.to change(Project, :count).by(0)
+        }.to change(Project, :count).by(0)
       end
     end
   end
