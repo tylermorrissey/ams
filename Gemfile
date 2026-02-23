@@ -18,6 +18,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 7.0'
   gem 'factory_bot_rails', '~> 6.4'
   gem 'rails-controller-testing'
+  gem 'rubocop'
 end
 
 group :development do
