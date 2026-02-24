@@ -1,4 +1,6 @@
 class TimeCardsController < ApplicationController
+  before_action :set_time_card, only: [:show, :edit, :update, :destroy]
+
   def new
     @time_card = TimeCard.new
   end
@@ -14,19 +16,17 @@ class TimeCardsController < ApplicationController
   end
 
   def index
-    @time_card = TimeCard.all
+    @time_cards = TimeCard.all
   end
 
   def show
-    @time_card = TimeCard.find(:id)
   end
 
   def edit
-    @time_card = TimeCard.find(time_card_params[:id])
   end
 
   def update
-    if @time_card.update(time_card_params[:id])
+    if @time_card.update(time_card_params)
       redirect_to @time_card, notice: "Time Card was updated"
     else
       render :edit, status: :unprocessable_entity
@@ -35,10 +35,14 @@ class TimeCardsController < ApplicationController
 
   def destroy
     @time_card.destroy
-    redirect_to time_card_url, notice: "Time Card was successfully deleted."
+    redirect_to time_cards_path, notice: "Time Card was successfully deleted."
   end
 
   private
+  def set_time_card
+    @time_card = TimeCard.find(params[:id])
+  end
+
   def time_card_params
     params.require(:time_card).permit(:clock_in, :clock_out, :project_id, :employee_id)
   end

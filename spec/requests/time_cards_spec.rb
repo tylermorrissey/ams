@@ -8,8 +8,8 @@ RSpec.describe 'TimeCards', type: :request do
       TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
                        employee_id: employee.id, project_id: project.id)
     end
-    xit 'responds with a success code 200' do
-      gets time_cards_path
+    it 'responds with a success code 200' do
+      get time_cards_path
 
       expect(response).to have_http_status(:success)
     end
@@ -59,8 +59,8 @@ RSpec.describe 'TimeCards', type: :request do
                        employee_id: employee.id, project_id: project.id)
     end
 
-    xit 'returns a successful response' do
-      get time_card_path(time_card)
+    it 'returns a successful response' do
+      get time_cards_path(time_card)
 
       expect(response).to have_http_status(:success)
     end
@@ -83,20 +83,20 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0).to_s, clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8).to_s,
                        employee_id: employee.id, project_id: project.id)
     end
 
-    xit 'returns a successful response' do
-      get time_card_path(time_card)
+    it 'returns a successful response' do
+      get time_cards_path(time_card)
 
       expect(response).to have_http_status(:success)
     end
 
-    xit 'has the proper fields' do
-      get time_card_path(time_card)
+    it 'has the proper fields' do
+      get time_cards_path(time_card)
 
-      expect(response.body).to include(Time.new(2026, 8, 1, 14, 35, 0), Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8), project.id,
+      expect(response.body).to include(Time.new(2026, 8, 1, 14, 35, 0).to_s, Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8).to_s, project.id,
                                        employee.id)
     end
   end
@@ -107,14 +107,15 @@ RSpec.describe 'TimeCards', type: :request do
       TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
                        employee_id: employee.id, project_id: project.id)
     end
-    xit 'successfully updates the clock in' do
-      new_time = Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 1)
-
+    it 'successfully updates the clock in' do
+      new_time = Time.new(2026, 9, 1, 14, 35, 0)
+      puts new_time
       patch time_card_path(time_card), params: {
         time_card: { clock_in: new_time }
       }
       time_card.reload
-      expect(time_card.clock_in.to_i).to eq(new_time.to_i)
+      puts time_card.errors.full_messages
+      expect(time_card.clock_in).to eq(new_time)
     end
   end
   describe 'PUT /time_cards/:id' do # update
@@ -124,11 +125,11 @@ RSpec.describe 'TimeCards', type: :request do
       TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
                        employee_id: employee.id, project_id: project.id)
     end
-    xit 'successfully updates the Time Card' do
+    it 'successfully updates the Time Card' do
       new_clock_in = 1.hour.from_now
       new_clock_out = 1.hour.from_now
       put time_card_path(time_card), params: {
-        time_card: { clock_in: new_clock_in, clock_out: new_clock_out }
+        time_card: { clock_in: new_clock_in.to_i, clock_out: new_clock_out.to_i }
       }
       time_card.reload
       expect(time_card).to have_attributes(clock_in: new_clock_in.to_i, clock_out: new_clock_out.to_i, employee_id: employee.id,
@@ -155,7 +156,7 @@ RSpec.describe 'TimeCards', type: :model do
   describe '#hours_worked' do
     context 'with valid parameters' do
       let!(:start) { Time.new(2026, 8, 1, 14, 35, 0) }
-      let!(:finish) { Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8) }
+      let!(:finish) { Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8)}
       it 'successfully returns the correct hours' do
         expect(hours_worked(start, finish)).to eq(8.00)
       end
