@@ -109,12 +109,10 @@ RSpec.describe 'TimeCards', type: :request do
     end
     it 'successfully updates the clock in' do
       new_time = Time.new(2026, 9, 1, 14, 35, 0)
-      puts new_time
       patch time_card_path(time_card), params: {
         time_card: { clock_in: new_time }
       }
       time_card.reload
-      puts time_card.errors.full_messages
       expect(time_card.clock_in).to eq(new_time)
     end
   end
