@@ -23,7 +23,8 @@
 
 
     <%= form.label "Employees on Site" %> <br>
-    <%= form.collection_select :employee_ids, @employees, :id, :name, ... %>
+    <%= form.collection_select :employee_ids, @employees, :id, :name, 
+                               { prompt: "Choose an Employee" }, { multiple: true } %>
 
 
 

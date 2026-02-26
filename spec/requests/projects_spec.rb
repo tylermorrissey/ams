@@ -76,24 +76,8 @@ RSpec.describe 'Projects', type: :request do
   end
 
   describe 'GET /projects/new' do # new
-    let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
-    let!(:project) do
-      Project.create!(customer_name: 'Acme Construction LLC',
-                      address: '1234 Industrial Way, Columbus, OH 43215',
-                      desc: 'Commercial HVAC installation for new office build-out',
-                      job_type: 'Commercial Installation',
-                      estimates: 18_500.75,
-                      net_cost: 17_240.50,
-                      employee_ids: [employee.id],
-                      materials: 'Ductwork, rooftop unit, thermostats, copper piping',
-                      hours_onsite: 64.5,
-                      equipment_onsite: 'Scissor lift, welding kit, HVAC vacuum pump',
-                      date_started: Date.new(2026, 7, 1),
-                      date_ended: Date.new(2026, 7, 10))
-    end
-
     it 'returns a successful response' do
-      get projects_path(project)
+      get new_project_path
 
       expect(response).to have_http_status(:success)
     end
@@ -117,7 +101,7 @@ RSpec.describe 'Projects', type: :request do
     end
 
     it 'displays the customer name of the project' do
-      get project_path(project)
+      get edit_project_path(project)
 
       expect(response.body).to include('Acme Construction LLC')
     end
@@ -251,8 +235,8 @@ RSpec.describe 'Projects', type: :request do
 
     it 'successfully deletes the Project' do
       expect do
-        delete project_path(project).to change(Project, :count).by(-1)
-      end
+        delete project_path(project)
+      end.to change(Project, :count).by(-1)
     end
   end
 end
