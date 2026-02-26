@@ -4,5 +4,4 @@ class Vehicle < ApplicationRecord
   validates :nick_name, presence: true, uniqueness: true
 
   has_many :project_vehicles
-  
 end

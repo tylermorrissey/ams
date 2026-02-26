@@ -1,10 +1,9 @@
 class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
-    @project.save!
 
-    if @project.valid?
-      render :index
+    if @project.save
+      redirect_to projects_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -13,19 +12,51 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
   end
-  
+
   def index
     @projects = Project.all
   end
 
   def show
-    Project.find(:id)
+    @project = Project.find(params[:id])
   end
 
-private 
+  def edit
+    @project = Project.find(params[:id])
+    @employees = Employee.all
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      redirect_to @project
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to projects_path, notice: 'Project was succesffully deleted.'
+  end
+
+  private
+
   def project_params
-    params.require(:project).permit(:customer_name, :date, :address, :desc, :job_type, 
-                                    :estimates, :net_cost, :employees, :materials, :hours_onsite, 
-                                    :equipment_onsite)
+    params.require(:project).permit(
+      :customer_name,
+      :address,
+      :desc,
+      :job_type,
+      :estimates,
+      :net_cost,
+      :materials,
+      :hours_onsite,
+      :equipment_onsite,
+      :date_started,
+      :date_ended,
+      employee_ids: []
+    )
   end
 end
