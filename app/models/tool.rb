@@ -1,3 +1,3 @@
 class Tool < ApplicationRecord
-  belongs_to :project
+  has_many :project, dependent: :destroy
 end

@@ -1,4 +1,5 @@
 class ToolsController < ApplicationController
+  before_action :set_tool, only: %i[show edit update destroy]
   def new
     @tool = Tool.new
   end
@@ -18,8 +19,6 @@ class ToolsController < ApplicationController
   end
 
   def update
-    @tool = Tool.find(params[:id])
-
     if @tool.update(tool_params)
       redirect_to tool_path(@tool)
     else
@@ -28,18 +27,14 @@ class ToolsController < ApplicationController
   end
 
   def show
-    @tool = Tool.find(params([:id]))
   end
 
   def edit
-    @tool = Tool.find(params([:id]))
-    @assignment = Assignment.find(params([:id]))
   end
 
   def destroy
-    @tool = Tool.find(params([:id]))
     @tool.destroy
-    redirect_to tools_path notice: 'Tool was successfully deleted.'
+    redirect_to tools_path, notice: 'Tool was successfully deleted.'
   end
 
   private
@@ -51,7 +46,11 @@ class ToolsController < ApplicationController
       :model,
       :serial_number,
       :purchase_date,
-      :project_id
+      project_id: []
     )
+  end
+
+  def set_tool
+    @tool = Tool.find(params[:id])
   end
 end

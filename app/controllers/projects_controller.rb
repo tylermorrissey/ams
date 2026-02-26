@@ -56,7 +56,8 @@ class ProjectsController < ApplicationController
       :equipment_onsite,
       :date_started,
       :date_ended,
-      employee_ids: []
+      employee_ids: [],
+      assigned_tool_ids: []
     )
   end
 end
