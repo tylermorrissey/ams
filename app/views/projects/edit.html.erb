@@ -23,14 +23,13 @@
 
 
     <%= form.label "Employees on Site" %> <br>
-    <%#= form.collection_select :employee_id, @employees, :name, :id, { prompt: "Choose an Employee" }, { multiple: true}  %> <br>
-    <%= form.collection_select :employee_ids, Employee.all, :id, :name, { prompt: "Choose an Employee" }, { multiple: true}  %> <br>
+    <%= form.collection_select :employee_ids, @employees, :id, :name, 
+                               { prompt: "Choose an Employee" }, { multiple: true } %>
 
 
 
     <%= form.label "Total Hours Onsite" %> <br>
     <%= form.number_field :hours_onsite, min: 0, max: 100, step: 1 %> <br>
-    <%# This will most likely run a query from all employees %>
 
 
     <%= form.label "Date Started" %> <br>
