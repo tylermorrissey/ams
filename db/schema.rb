@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_22_165346) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_26_214729) do
+  create_table "assigned_tools", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.float "hours_onsite"
+    t.integer "project_id", null: false
+    t.integer "tool_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_assigned_tools_on_project_id"
+    t.index ["tool_id"], name: "index_assigned_tools_on_tool_id"
+  end
+
   create_table "assignments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "employee_id"
@@ -54,12 +64,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_165346) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "time_cards", force: :cascade do |t|
+    t.time "clock_in", null: false
+    t.time "clock_out"
+    t.datetime "created_at", null: false
+    t.integer "employee_id", null: false
+    t.integer "project_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_time_cards_on_employee_id"
+    t.index ["project_id"], name: "index_time_cards_on_project_id"
+  end
+
   create_table "tools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "make"
     t.string "model"
     t.string "name"
-    t.integer "project_id"
     t.date "purchase_date"
     t.string "serial_number"
     t.datetime "updated_at", null: false
@@ -73,6 +93,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_22_165346) do
     t.integer "year"
   end
 
+  add_foreign_key "assigned_tools", "projects"
+  add_foreign_key "assigned_tools", "tools"
   add_foreign_key "assignments", "employees"
   add_foreign_key "assignments", "projects"
+  add_foreign_key "time_cards", "employees"
+  add_foreign_key "time_cards", "projects"
 end
