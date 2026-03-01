@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
       :date_started,
       :date_ended,
       employee_ids: [],
-      assigned_tool_ids: []
+      tool_ids: []
     )
   end
 end
