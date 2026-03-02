@@ -45,8 +45,7 @@ class ToolsController < ApplicationController
       :make,
       :model,
       :serial_number,
-      :purchase_date,
-      project_id: []
+      :purchase_date
     )
   end
 

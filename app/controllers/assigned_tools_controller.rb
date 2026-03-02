@@ -7,7 +7,7 @@ class AssignedToolsController < ApplicationController
     if @assigned_tool.save
       redirect_to project_path(@assigned_tool.project), notice: 'Tool has been assigned to project'
     else
-      redirect_to :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -15,7 +15,7 @@ class AssignedToolsController < ApplicationController
     if @assigned_tool.update(assigned_tool_params)
       redirect_to assigned_tool_path(@assigned_tool), notice: 'Assigned Tools were updated.'
     else
-      redirect_to :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 

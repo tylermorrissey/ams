@@ -45,12 +45,12 @@ RSpec.describe 'AssignedTools', type: :request do
           post assigned_tools_path, params: { assigned_tool: valid_params }
         end.to change(AssignedTool, :count).by(1)
       end
-      context 'with invalid params' do
-        it 'does not create an AssignedTool ' do
-          expect do
-            post assigned_tools_path, params: { assigned_tool: invalid_params }
-          end.to change(AssignedTool, :count).by(0)
-        end
+    end
+    context 'with invalid params' do
+      it 'does not create an AssignedTool ' do
+        expect do
+          post assigned_tools_path, params: { assigned_tool: invalid_params }
+        end.to change(AssignedTool, :count).by(0)
       end
     end
   end
