@@ -1,0 +1,14 @@
+<h1>Assign a Tool to a Project</h1>
+<div>
+  <%form_with model: assigned_tool do |form| %>
+    <%form.label "Tool Name"%>
+    <%form.collection :tool_id, @tools, :id, :name, 
+                               { prompt: "Choose a Tool" }, { multiple: true } %>
+    
+    <%form.label "Project Name"%>
+    <%form.collection :project_id, @projects, :id, :customer_name, 
+                               { prompt: "Choose a Project" }, { multiple: true } %>  
+    
+    <%form.submit "Submit"%>
+  <% end %>
+</div>

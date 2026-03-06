@@ -1,5 +1,7 @@
 class ToolsController < ApplicationController
   before_action :set_tool, only: %i[show edit update destroy]
+  ALLOWED_SORT_COLUMNS = %w[name make model projects].freeze
+  ALLOWED_DIRECTIONS = %w[asc desc].freeze
   def new
     @tool = Tool.new
   end
@@ -15,7 +17,10 @@ class ToolsController < ApplicationController
   end
 
   def index
-    @tools = Tool.all
+    sort_column = ALLOWED_SORT_COLUMNS.include?(params[:sort]) ? params[:sort] : 'name'
+    @tools = Tool.order(sort_column)
+    # sort_direction = ALLOWED_DIRECTIONS.include?(params[:direction]&.downcase) ? params[:direction].downcase : 'desc'
+    # @tools = Tool.order("#{sort_column} #{sort_direction}")
   end
 
   def update
@@ -27,6 +32,7 @@ class ToolsController < ApplicationController
   end
 
   def show
+    @assigned_tools = @tool.projects
   end
 
   def edit

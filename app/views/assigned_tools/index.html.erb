@@ -1,0 +1,21 @@
+<div>
+  <h1>All Assigned Tools</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Tool Name</th>
+        <th>Current Project</th>
+        <th>Hours Worked Onsite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assigned_tool.each do |tool|%>
+        <tr>
+          <td><%tool.tools.map(&name)%></td>
+          <td><%tool.projects.map(&customer_name)%></td>
+          <td><%tool.hours_onsite%>
+        </tr>
+      <% end %>  
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,45 @@
+<h1> <%=@tool.name%> </h1>
+<%= link_to "Back", :back %>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Serial Number</th>
+        <th>Purchase Date</th>
+        <th>Current Project</th>
+        <th>Hours Onsite</th>
+        <th>Project History</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+        
+          <tr> 
+            <td> <%= @tool.name %> </td>
+            <td> <%= @tool.make %> </td>
+            <td> <%= @tool.model %> </td>
+            <td> <%= @tool.serial_number %> </td>
+            <%# Add a Last maintained date? %>
+            <%# Could have a query 'Maintenance Records' %>
+            <%# Could do this for vehicles as well %>
+            <td> <%= @tool.purchase_date %> </td>
+            <td>
+              <% @tool.projects.each do |project| %> 
+                <%= project.customer_name %>
+              <% end %>
+            </td>
+            <td>
+              <% @assigned_tools.each do |t| %>
+                <%= t.hours_onsite %>
+              <% end %>
+            </td>
+            <td>
+              <%@tool.project_ids%>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+</div>

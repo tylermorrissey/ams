@@ -24,6 +24,11 @@ class ProjectsController < ApplicationController
   def edit
     @project = Project.find(params[:id])
     @employees = Employee.all
+    @tools = Tool.all
+
+    @tools.each do |tool|
+      @project.assigned_tools.find_or_initialize_by(tool_id: tool.id)
+    end
   end
 
   def update
@@ -56,6 +61,7 @@ class ProjectsController < ApplicationController
       :equipment_onsite,
       :date_started,
       :date_ended,
+      :hours_onsite,
       employee_ids: [],
       tool_ids: []
     )

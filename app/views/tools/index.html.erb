@@ -1,0 +1,45 @@
+<h1> All Tools </h1>
+<%= button_to "New Tool", new_tool_path, method: :get %>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th> <%= link_to "Name", tools_path(sort: "name")%> </th> 
+        <th> <%= link_to "Make", tools_path(sort: "make")%> </th> 
+        <th> <%= link_to "Model", tools_path(sort: "model")%> </th> 
+        <th> <%= link_to "Current Project", tools_path(sort: "projects.customer_name")%> </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @tools.present?%>
+        <% @tools.each do |tool|  %>
+          <tr>            
+            <td> <%= tool.name %> </td>
+            <td> <%= tool.make %> </td>
+            <td> <%= tool.model %> </td>
+
+            <td>
+              <% tool.projects.each do |project| %>
+                <%= project.customer_name %> 
+              <% end %>
+            </td>
+
+            <td><%= link_to "Show", tool %></td>
+            <td><%= link_to "Edit", edit_tool_path(tool) %></td>
+            <td><%= button_to "Delete", tool_path(tool), method: :delete,
+              data: { turbo_confirm: "Are you sure?" } %></td>
+          </tr>
+        <% end %>
+
+        <% else %>
+          <p>You dont have any tools. <% link_to "Add one!", new_tool_path %></p>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
