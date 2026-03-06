@@ -1,5 +1,5 @@
 <h1>Edit <%=@tool.name%> </h1>
-<%= link_to "Back", :back %>
+<%= link_to "Back", tools_path %>
 <div>
   <%= form_with model: @tool do |form| %>
     <%= form.label "Tool Name" %> <br>

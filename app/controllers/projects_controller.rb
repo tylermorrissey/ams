@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.all.includes(:employees, :tools)
   end
 
   def show

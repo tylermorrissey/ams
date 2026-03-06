@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'AssignedTools', type: :model do
   describe AssignedTool do
     let(:tool) do
-      Tool.create(name: 'Chainsaw', make: 'Stihl', model: '690', serial_number: '12345', purchase_date: Date.today)
+      Tool.create!(name: 'Chainsaw', make: 'Stihl', model: '690', serial_number: '12345', purchase_date: Date.today)
     end
 
     let!(:employee) { Employee.create!(name: 'test', email: 'test@example.com', role: 'test') }

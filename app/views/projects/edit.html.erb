@@ -24,14 +24,14 @@
 
     <%= form.label "Employees on Site" %> <br>
     <%= form.collection_select :employee_ids, @employees, :id, :name, 
-                               { prompt: "Choose an Employee" }, { multiple: true } %>
+                               { prompt: "Choose an Employee(s)" }, { multiple: true } %>
 
     <%= form.label "Assign Tool to Project" %> <br>
     <%= form.collection_select :tool_ids, @tools, :id, :name,
-                               { prompt: "Select a Tool" }, { multiple: true }%>
+                               { prompt: "Select a Tool(s)" }, { multiple: true }%>
 
     <%= form.label "Total Tool Hours Onsite" %> <br>
-    <%= fields_for :assigned_tool do |assigned_tools_form|%>
+    <%= form.fields_for :assigned_tool do |assigned_tools_form|%>
       <%= assigned_tools_form.number_field :hours_onsite %>
     <%end%>
 
