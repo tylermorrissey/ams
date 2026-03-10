@@ -30,12 +30,12 @@
             <% end %>
           </td>
           <td>
-            <% @tool.projects.each do |t| %>
-              <%= t.hours_onsite %>
+            <% @assigned_tools.each do |at| %>
+              <%= at.hours_onsite %>
             <% end %>
           </td>
           <td>
-            <%= @tool.projects %>
+            <%= @tool.projects.map(&:customer_name).join(", ") %>
           </td>
       </tr>
     </tbody>

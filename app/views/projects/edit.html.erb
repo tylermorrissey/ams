@@ -56,7 +56,7 @@
                 <%@project.tools.each do |tool| %>
                 <tr>
                   <td><%= tool.name %></td>
-                  <td><%= form.fields_for :assigned_tool do |assigned_tools_form|%>
+                  <td><%= form.fields_for :assigned_tools do |assigned_tools_form|%>
                         <%= assigned_tools_form.number_field :hours_onsite %>
                       <%end%> </td>
                 </tr>

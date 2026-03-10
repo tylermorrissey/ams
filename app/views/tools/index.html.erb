@@ -1,5 +1,5 @@
 <h1> All Tools </h1>
-<%= button_to "New Tool", new_tool_path, method: :get %>
+<%= link_to "New Tool", new_tool_path, method: :get %>
 <div>
   <table>
     <thead>
@@ -8,7 +8,6 @@
         <th> <%= link_to "Make", tools_path(sort: "make")%> </th> 
         <th> <%= link_to "Model", tools_path(sort: "model")%> </th> 
         <th> <%= link_to "Current Project", tools_path(sort: "projects.customer_name")%> </th>
-        <th></th>
         <th></th>
         <th></th>
         <th></th>

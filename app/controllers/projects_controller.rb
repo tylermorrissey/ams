@@ -63,7 +63,8 @@ class ProjectsController < ApplicationController
       :date_ended,
       :hours_onsite,
       employee_ids: [],
-      tool_ids: []
+      tool_ids: [],
+      assigned_tools: %i[id hours_onsite]
     )
   end
 end
