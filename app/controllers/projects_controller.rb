@@ -22,17 +22,14 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = Project.includes(assigned_tools: :tool).find(params[:id])
     @employees = Employee.all
     @tools = Tool.all
-
-    @tools.each do |tool|
-      @project.assigned_tools.find_or_initialize_by(tool_id: tool.id)
-    end
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = Project.includes(assigned_tools: :tool).find(params[:id])
+
     if @project.update(project_params)
       redirect_to @project
     else
@@ -64,7 +61,7 @@ class ProjectsController < ApplicationController
       :hours_onsite,
       employee_ids: [],
       tool_ids: [],
-      assigned_tools: %i[id hours_onsite]
+      assigned_tools_attributes: %i[id hours_onsite]
     )
   end
 end

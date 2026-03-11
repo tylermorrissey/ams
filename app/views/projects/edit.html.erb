@@ -53,13 +53,11 @@
                 </tr>
               </thead>
               <tbody>
-                <%@project.tools.each do |tool| %>
-                <tr>
-                  <td><%= tool.name %></td>
-                  <td><%= form.fields_for :assigned_tools do |assigned_tools_form|%>
-                        <%= assigned_tools_form.number_field :hours_onsite %>
-                      <%end%> </td>
-                </tr>
+                <%= form.fields_for :assigned_tools do |at_form| %>
+                  <tr>
+                    <td><%= at_form.object.tool.name %></td>
+                    <td><%= at_form.number_field :hours_onsite %></td>
+                  </tr>
                 <% end %>
               </tbody>
             </table>
