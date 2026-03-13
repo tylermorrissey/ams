@@ -2,46 +2,71 @@
 <%= link_to "Back", :back %>
 <%= form_with model: @project do |form| %>
   <div>
-    <%= form.label "Customer Name" %> <br>
+    <%= form.label "Customer Name" %>
     <%= form.text_field :customer_name %> <br>
 
-    <%= form.label "Address" %> <br>
+    <%= form.label "Address" %>
     <%= form.text_field :address %> <br>
 
-    <%= form.label "Description of Job" %> <br>
+    <%= form.label "Description of Job" %>
     <%= form.text_field :desc %> <br>
 
-    <%= form.label "Job Type" %> <br>
+    <%= form.label "Job Type" %> 
     <%= form.select :job_type, ["Landscape", "Hardscape", "Fall Cleanup", "Installation", "Irrigation", "Arbor", "Removal"] %> <br>
 
-    <%= form.label "Estimated Cost" %> <br>
+    <%= form.label "Estimated Cost" %>
     <%= form.text_field :estimates %> <br>
 
 
-    <%= form.label "Net Cost" %> <br>
+    <%= form.label "Net Cost" %> 
     <%= form.text_field :net_cost %> <br>
 
 
-    <%= form.label "Employees on Site" %> <br>
+    <%= form.label "Employees on Site" %> 
     <%= form.collection_select :employee_ids, @employees, :id, :name, 
-                               { prompt: "Choose an Employee" }, { multiple: true } %>
+                               { prompt: "Choose an Employee(s)" }, { multiple: true } %>
 
+    <%= form.label "Assign Tool to Project" %> 
+    <%= form.collection_select :tool_ids, @tools, :id, :name,
+                               { prompt: "Select a Tool(s)" }, { multiple: true }%>
 
-
-    <%= form.label "Total Hours Onsite" %> <br>
+    <%= form.label "Total Hours Onsite" %>
     <%= form.number_field :hours_onsite, min: 0, max: 100, step: 1 %> <br>
 
 
-    <%= form.label "Date Started" %> <br>
+    <%= form.label "Date Started" %>
     <%= form.date_field :date_started %> <br>
 
 
-    <%= form.label "Date Finished" %> <br>
+    <%= form.label "Date Finished" %> 
     <%= form.date_field :date_ended %> <br>
-
-
-
-
-    <%= form.submit "Submit" %>
     </div>
+
+    <h1>Edit Tools Onsite Information</h1>
+    <% if @project.tools.present? %>
+      <div>
+        <table>
+              <thead>
+                <tr>
+                  <th>Current Tools Onsite</th>
+                  <th>Hours Onsite</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= form.fields_for :assigned_tools do |at_form| %>
+                  <tr>
+                    <td><%= at_form.object.tool.name %></td>
+                    <td><%= at_form.number_field :hours_onsite %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+      </div>
+  <%else%>
+      <p>You don't have any tools assigned to this project yet.</p>
   <%end%>
+  <%= form.submit "Submit" %>
+<%end%>
+
+
+

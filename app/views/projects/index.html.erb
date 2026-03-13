@@ -8,6 +8,8 @@
         <th>Address</th>
         <th>Job Type</th>
         <th>Employees</th>
+        <th>Tools</th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -21,6 +23,8 @@
           <td> <%= project.address%> </td>
           <td> <%= project.job_type%> </td>
           <td> <%= project.employees.map(&:name).join(", ")%> </td>
+          <td> <%= project.tools.map(&:name).join(", ")%> </td>
+
           
           <td><%= link_to "Show", project %></td>
           <td><%= link_to "Edit", edit_project_path(project) %></td>

@@ -1,0 +1,21 @@
+<h1> New Tool </h1>
+<div>
+  <%= form_with model: @tool do |form| %>
+    <%= form.label "Tool Name" %> <br>
+    <%= form.text_field :name %> <br>
+
+    <%= form.label "Make" %> <br>
+    <%= form.text_field :make %> <br>
+
+    <%= form.label "Model" %> <br>
+    <%= form.text_field :model %> <br>
+
+    <%= form.label "Serial Number" %> <br>
+    <%= form.text_field :serial_number %> <br>
+
+    <%= form.label "Date Purchased" %> <br>
+    <%= form.date_field :purchase_date %> <br>
+
+    <%= form.submit "Submit" %>
+  <% end %>
+</div>

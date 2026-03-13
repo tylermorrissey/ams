@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.all.includes(:employees, :tools)
   end
 
   def show
@@ -22,12 +22,14 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = Project.includes(assigned_tools: :tool).find(params[:id])
     @employees = Employee.all
+    @tools = Tool.all
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = Project.includes(assigned_tools: :tool).find(params[:id])
+
     if @project.update(project_params)
       redirect_to @project
     else
@@ -56,8 +58,10 @@ class ProjectsController < ApplicationController
       :equipment_onsite,
       :date_started,
       :date_ended,
+      :hours_onsite,
       employee_ids: [],
-      tool_ids: []
+      tool_ids: [],
+      assigned_tools_attributes: %i[id hours_onsite]
     )
   end
 end

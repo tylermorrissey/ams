@@ -12,7 +12,7 @@
       <th>Net Cost</th>
       <th>Employees</th>
       <th>Hours Onsite</th>      
-      <th>Equipment</th>
+      <th>Tools</th>
       <th>Date Started</th>
       <th>Date Ended</th>
     </tr>
@@ -27,7 +27,7 @@
         <td><%= @project.net_cost %></td>
         <td><%= @project.employees.map(&:name).join(", ") %></td>
         <td><%= @project.hours_onsite %></td>
-        <td><%= @project.equipment_onsite %></td>
+        <td><%= @project.tools.map(&:name).join(", ") %></td>
         <td><%= @project.date_started %></td>
         <td><%= @project.date_ended %></td>
       </tr>
