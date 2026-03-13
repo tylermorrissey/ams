@@ -1,0 +1,35 @@
+<h1>Show Project</h1>
+<%= link_to "Back", :back %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Address</th>
+      <th>Description</th>      
+      <th>Estimate</th>
+      <th>Job Type</th>
+      <th>Net Cost</th>
+      <th>Employees</th>
+      <th>Hours Onsite</th>      
+      <th>Tools</th>
+      <th>Date Started</th>
+      <th>Date Ended</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @project.customer_name %></td>
+        <td><%= @project.address %></td>
+        <td><%= @project.desc %></td>
+        <td><%= @project.estimates %></td>
+        <td><%= @project.job_type %></td>
+        <td><%= @project.net_cost %></td>
+        <td><%= @project.employees.map(&:name).join(", ") %></td>
+        <td><%= @project.hours_onsite %></td>
+        <td><%= @project.tools.map(&:name).join(", ") %></td>
+        <td><%= @project.date_started %></td>
+        <td><%= @project.date_ended %></td>
+      </tr>
+  </tbody>
+</table>
