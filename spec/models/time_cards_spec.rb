@@ -43,5 +43,19 @@ RSpec.describe 'TimeCards', type: :model do
         expect(time_card).to_not be_valid
       end
     end
+
+    describe 'associations testing' do
+      let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
+      let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
+      it 'should belong to Employee' do
+        t = TimeCard.reflect_on_association(:employee)
+        expect(t.macro).to eq(:belongs_to)
+      end
+
+      it 'should belong to Project' do
+        t = TimeCard.reflect_on_association(:project)
+        expect(t.macro).to eq(:belongs_to)
+      end
+    end
   end
 end
