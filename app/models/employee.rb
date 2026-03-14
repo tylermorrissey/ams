@@ -5,4 +5,5 @@ class Employee < ApplicationRecord
 
   has_many :assignments
   has_many :projects, through: :assignments
+  has_many :time_cards
 end
