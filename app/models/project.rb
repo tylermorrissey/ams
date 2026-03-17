@@ -4,7 +4,7 @@ class Project < ApplicationRecord
   has_many :vehicles
   has_many :assigned_tools, dependent: :destroy
   has_many :tools, through: :assigned_tools
-  has_many :time_cards
+  has_many :time_cards, dependent: :destroy
   accepts_nested_attributes_for :assigned_tools
 
   validates :customer_name, presence: true

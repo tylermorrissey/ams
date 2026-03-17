@@ -6,7 +6,7 @@ class TimeCardsController < ApplicationController
   end
 
   def create
-    @time_card = TimeCard.create(time_card_params)
+    @time_card = TimeCard.new(time_card_params)
 
     if @time_card.save
       redirect_to @time_card, notice: 'Time Card was successfully recorded'
@@ -45,6 +45,6 @@ class TimeCardsController < ApplicationController
   end
 
   def time_card_params
-    params.require(:time_card).permit(:clock_in, :clock_out, :project_id, :employee_id)
+    params.require(:time_card).permit(:clock_in, :clock_out, :date, :project_id, :employee_id)
   end
 end

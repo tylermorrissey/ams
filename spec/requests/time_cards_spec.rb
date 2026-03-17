@@ -5,8 +5,11 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
-                       employee_id: employee.id, project_id: project.id)
+      TimeCard.create!(clock_in: Time.utc(2026, 8, 1, 14, 35, 0),
+                       clock_out: Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
+                       employee_id: employee.id,
+                       project_id: project.id)
     end
     xit 'responds with a success code 200' do
       get time_cards_path
@@ -19,8 +22,9 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let(:valid_attributes) do
       {
-        clock_in: Time.new(2026, 8, 1, 14, 35, 0),
-        clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+        clock_in: Time.utc(2026, 8, 1, 14, 35, 0),
+        clock_out: Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+        date: Date.current,
         employee_id: employee.id,
         project_id: project.id
       }
@@ -30,6 +34,7 @@ RSpec.describe 'TimeCards', type: :request do
       {
         clock_in: '',
         clock_out: '',
+        date: '',
         employee_id: '',
         project_id: ''
       }
@@ -55,8 +60,11 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
-                       employee_id: employee.id, project_id: project.id)
+      TimeCard.create!(clock_in: Time.utc(2026, 8, 1, 14, 35, 0),
+                       clock_out: Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
+                       employee_id: employee.id,
+                       project_id: project.id)
     end
 
     xit 'returns a successful response' do
@@ -70,8 +78,11 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
-                       employee_id: employee.id, project_id: project.id)
+      TimeCard.create!(clock_in: Time.utc(2026, 8, 1, 14, 35, 0),
+                       clock_out: Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
+                       employee_id: employee.id,
+                       project_id: project.id)
     end
 
     xit 'displays the Time Card clock in time' do
@@ -85,8 +96,9 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0).to_s,
-                       clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8).to_s,
+      TimeCard.create!(clock_in: Time.utc(2026, 8, 1, 14, 35, 0),
+                       clock_out: Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
                        employee_id: employee.id,
                        project_id: project.id)
     end
@@ -112,6 +124,7 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:time_card) do
       TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0),
                        clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
                        employee_id: employee.id,
                        project_id: project.id)
     end
@@ -120,8 +133,6 @@ RSpec.describe 'TimeCards', type: :request do
       patch time_card_path(time_card), params: {
         time_card: { employee_id: new_employee.id }
       }
-      # puts response.status # add this
-      # puts response.body # add this
       time_card.reload
       expect(time_card.employee_id).to eq(new_employee.id)
     end
@@ -130,17 +141,25 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
-                       employee_id: employee.id, project_id: project.id)
+      TimeCard.create!(clock_in: Time.utc(2026, 8, 1, 14, 35, 0),
+                       clock_out: Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
+                       employee_id: employee.id,
+                       project_id: project.id)
     end
-    xit 'successfully updates the Time Card' do
-      new_clock_in = 1.hour.from_now
-      new_clock_out = 1.hour.from_now
+    it 'successfully updates the Time Card' do
+      new_clock_in = Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 1)
+      new_clock_out = Time.utc(2026, 8, 1, 14, 35, 0).advance(hours: 9)
+      new_date = Date.tomorrow
       put time_card_path(time_card), params: {
-        time_card: { clock_in: new_clock_in.to_i, clock_out: new_clock_out.to_i }
+        time_card: { clock_in: new_clock_in,
+                     clock_out: new_clock_out,
+                     date: new_date,
+                     employee_id: employee.id,
+                     project_id: project.id }
       }
       time_card.reload
-      expect(time_card).to have_attributes(clock_in: new_clock_in.to_i, clock_out: new_clock_out.to_i, employee_id: employee.id,
+      expect(time_card).to have_attributes(clock_in: new_clock_in, clock_out: new_clock_out, employee_id: employee.id,
                                            project_id: project.id)
     end
   end
@@ -148,8 +167,11 @@ RSpec.describe 'TimeCards', type: :request do
     let!(:employee) { Employee.create!(name: 'Test', email: 'test@example.com', role: 'test') }
     let!(:project) { Project.create!(customer_name: 'Test', address: 'Test') }
     let!(:time_card) do
-      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0), clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
-                       employee_id: employee.id, project_id: project.id)
+      TimeCard.create!(clock_in: Time.new(2026, 8, 1, 14, 35, 0),
+                       clock_out: Time.new(2026, 8, 1, 14, 35, 0).advance(hours: 8),
+                       date: Date.current,
+                       employee_id: employee.id,
+                       project_id: project.id)
     end
 
     it 'successfully deletes the Time Card' do
