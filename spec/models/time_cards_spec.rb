@@ -13,12 +13,10 @@ RSpec.describe 'TimeCards', type: :model do
       end
 
       context 'with invalid parameters' do
-        let!(:invalid_timecard) do
-          TimeCard.new(clock_in: Time.new('', '', '', '', '', ''),
-                       clock_out: Time.new('', '', '', '', '', ''))
-          it 'fails to calculate' do
-            expect { invalid_timecard.hours_worked }.to raise_error(NoMethodError)
-          end
+        let(:invalid_timecard) { TimeCard.new(clock_in: nil, clock_out: nil) }
+
+        it 'fails to calculate' do
+          expect { invalid_timecard.hours_worked }.to raise_error(NoMethodError)
         end
       end
     end
