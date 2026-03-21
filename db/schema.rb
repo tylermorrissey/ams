@@ -65,9 +65,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_26_214729) do
   end
 
   create_table "time_cards", force: :cascade do |t|
-    t.time "clock_in", null: false
-    t.time "clock_out"
+    t.datetime "clock_in", null: false
+    t.datetime "clock_out"
     t.datetime "created_at", null: false
+    t.date "date", null: false
     t.integer "employee_id", null: false
     t.integer "project_id", null: false
     t.datetime "updated_at", null: false
